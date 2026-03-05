@@ -10,6 +10,7 @@
         android:layout_height="60dp"
         android:layout_gravity="center"
         android:elevation="10dp"
+        android:indeterminateTint="@color/primary"
         android:visibility="gone" />
 
     <LinearLayout

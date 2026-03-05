@@ -17,7 +17,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.uffiziopracticaltask.adapter.SearchAdapter
 import com.example.uffiziopracticaltask.adapter.WeatherAdapter
-import com.example.uffiziopracticaltask.databinding.ActivityMainBinding
+import com.example.uffiziopracticaltask.databinding.ActivityHomeBinding
 import com.example.uffiziopracticaltask.network.RetrofitClient
 import com.example.uffiziopracticaltask.repository.WeatherRepository
 import com.example.uffiziopracticaltask.room.database.WeatherDatabase
@@ -27,10 +27,10 @@ import com.google.android.material.color.DynamicColors
 import java.util.Locale
 import java.util.concurrent.Executors
 
-class MainActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity() {
 
     private lateinit var viewModel: WeatherViewModel
-    private lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityHomeBinding
     private val LOCATION_PERMISSION_CODE = 100
 
     private val searchHandler = Handler(Looper.getMainLooper())
@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        binding = ActivityMainBinding.inflate(layoutInflater)
+        binding = ActivityHomeBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
         DynamicColors.applyToActivitiesIfAvailable(application)
@@ -104,7 +104,7 @@ class MainActivity : AppCompatActivity() {
     private fun performGeocoderSearch(query: String) {
         executor.execute {
             try {
-                val geocoder = Geocoder(this@MainActivity, Locale.getDefault())
+                val geocoder = Geocoder(this@HomeActivity, Locale.getDefault())
                 val list = geocoder.getFromLocationName(query, 5)
                 val cityList = list?.mapNotNull {
                     it.locality ?: it.featureName?.takeIf { name -> name.isNotBlank() }
